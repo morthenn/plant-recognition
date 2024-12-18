@@ -1,5 +1,9 @@
 # Plant Recognition System
 
+[![Build Status](https://github.com/morthenn/plant-recognition/actions/workflows/build.yml/badge.svg)](https://github.com/morthenn/plant-recognition/actions/workflows/build.yml)
+[![Docker Build](https://github.com/morthenn/plant-recognition/actions/workflows/docker.yml/badge.svg)](https://github.com/morthenn/plant-recognition/actions/workflows/docker.yml)
+[![Tests](https://github.com/morthenn/plant-recognition/actions/workflows/tests.yml/badge.svg)](https://github.com/morthenn/plant-recognition/actions/workflows/tests.yml)
+
 A microservices-based plant recognition system that allows users to upload plant images and get predictions about the plant species.
 
 ## Architecture Overview
