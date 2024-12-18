@@ -1,0 +1,30 @@
+<div class="home-container">
+    <mat-card class="welcome-card">
+        <mat-card-header>
+            <mat-card-title>Plant Recognition Service</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Upload your plant photos and let our AI identify them!</p>
+            
+            <ng-container *ngIf="(currentUser$ | async) as user; else loginPrompt">
+                <p>Welcome, {{user.username}}!</p>
+                <button mat-raised-button color="primary" routerLink="/upload">
+                    Upload Photo
+                </button>
+                <button mat-raised-button color="accent" routerLink="/my-photos">
+                    My Photos
+                </button>
+            </ng-container>
+            
+            <ng-template #loginPrompt>
+                <p>Please log in to start using our service.</p>
+                <button mat-raised-button color="primary" routerLink="/login">
+                    Login
+                </button>
+                <button mat-raised-button color="accent" routerLink="/register">
+                    Register
+                </button>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div> 

@@ -1,0 +1,27 @@
+<div class="upload-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Upload Plant Image</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+            <div class="upload-area" 
+                 (click)="fileInput.click()"
+                 [class.has-file]="selectedFile">
+                <input #fileInput type="file" 
+                       accept="image/*" 
+                       (change)="onFileSelected($event)" 
+                       style="display: none">
+                
+                <mat-icon>cloud_upload</mat-icon>
+                <p>{{ selectedFile ? selectedFile.name : 'Click to select an image' }}</p>
+            </div>
+
+            <button mat-raised-button color="primary" 
+                    [disabled]="!selectedFile || loading"
+                    (click)="uploadImage()">
+                {{ loading ? 'Uploading...' : 'Upload' }}
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div> 

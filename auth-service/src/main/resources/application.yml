@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:h2:mem:authdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: never
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    org.springframework.security: TRACE
+    org.springframework.security.web.FilterChainProxy: TRACE
+    org.springframework.security.web.access: TRACE
+    org.springframework.security.web.context: TRACE
+    org.springframework.web: TRACE
+    org.hibernate: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    com.example.auth: DEBUG
+    com.example.auth.service: TRACE
+    com.example.auth.security: TRACE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: localhost
+    instanceId: localhost:${spring.application.name}:${server.port}
+    statusPageUrl: http://localhost:${server.port}/info
+    healthCheckUrl: http://localhost:${server.port}/health
+    homePageUrl: http://localhost:${server.port}/
+
+jwt:
+  secret: NWY3ZmQ5NzM5MjE3YjkxNjc0YzFhOWE4YjM3ZDU5NDY=
+  expiration: 86400000
+
+server:
+  port: 8080
+
+# CORS Configuration
+cors:
+  allowed-origins: http://localhost:80,http://localhost:4200,http://localhost
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: Authorization,Content-Type,Origin,Accept,X-Requested-With
+  allow-credentials: true 

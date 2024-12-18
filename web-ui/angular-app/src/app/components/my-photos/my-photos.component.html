@@ -1,0 +1,27 @@
+<div class="photos-container">
+    <h2>My Plant Photos</h2>
+
+    <div *ngIf="loading" class="loading">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!loading" class="photos-grid">
+        <mat-card *ngFor="let image of images" class="photo-card">
+            <img [src]="image.imageUrl" [alt]="image.fileName">
+            <mat-card-content>
+                <p>Status: {{image.status}}</p>
+                <p *ngIf="image.recognitionResult">
+                    Result: {{image.recognitionResult}}
+                </p>
+                <p>Uploaded: {{image.uploadedAt | date}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div *ngIf="!loading && images.length === 0" class="no-photos">
+        <p>You haven't uploaded any photos yet.</p>
+        <button mat-raised-button color="primary" routerLink="/upload">
+            Upload Your First Photo
+        </button>
+    </div>
+</div> 

@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: image-service
+  data:
+    mongodb:
+      uri: mongodb://admin:password@mongodb:27017/imagedb?authSource=admin&authMechanism=SCRAM-SHA-256&retryWrites=true&connectTimeoutMS=30000&socketTimeoutMS=30000&serverSelectionTimeoutMS=30000
+      auto-index-creation: true
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: localhost
+    instanceId: localhost:${spring.application.name}:${server.port}
+    statusPageUrl: http://localhost:${server.port}/info
+    healthCheckUrl: http://localhost:${server.port}/health
+    homePageUrl: http://localhost:${server.port}/
+
+server:
+  port: 8081
+
+jwt:
+  secret: ${JWT_SECRET:NWY3ZmQ5NzM5MjE3YjkxNjc0YzFhOWE4YjM3ZDU5NDY=}
+
+kafka:
+  topic:
+    plant-images: plant-images
+
+# CORS Configuration
+cors:
+  allowed-origins: http://localhost,http://localhost:80,http://localhost:4200
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: Authorization,Content-Type,X-Requested-With
+  allow-credentials: true
+
+# File Upload Configuration
+spring.servlet.multipart:
+  max-file-size: 10MB
+  max-request-size: 10MB
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.data.mongodb: TRACE
+    org.mongodb: TRACE
+    org.springframework.boot: DEBUG
+    com.example.image: DEBUG
